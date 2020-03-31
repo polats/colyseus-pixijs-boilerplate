@@ -76,6 +76,10 @@ export class Application extends PIXI.Application {
         // await this.client.auth.login();
 
         console.log("Success!", this.client.auth);
+        console.log("HW: ", HASWINDOW);
+
+        console.log("env: " + process.env.NODE_ENV);
+        console.log("EP:" + ENDPOINT);
 
         this.room = await this.client.joinOrCreate<State>("arena");
 
