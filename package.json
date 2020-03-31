@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "schema-codegen": "schema-codegen src/server/rooms/*.ts --ts --output src/client/schema/",
-    "build": "tsc && webpack",
     "heroku-postbuild": "npm run build",
-    "start": "npm run build && npm run start-prod",
-    "start-prod": "cross-env NODE_ENV=production node ./lib/index.js",
-    "start-local": "cross-env node ./lib/index.js",
+    "build": "tsc && webpack",
+    "start": "cross-env NODE_ENV=production npm run build && cross-env NODE_ENV=production node ./lib/index.js",
+    "start-local": "cross-env NODE_ENV=none npm run build && cross-env NODE_ENV=none node ./lib/index.js",
     "dev": "cross-env NODE_ENV=development nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
