@@ -36,12 +36,12 @@
     "webpack-hot-middleware": "^2.24.3"
   },
   "dependencies": {
-    "@colyseus/monitor": "^0.11.0",
+    "@colyseus/monitor": "^0.12.1",
     "@colyseus/social": "^0.11.6",
-    "colyseus": "^0.12.0",
-    "colyseus.js": "^0.12.0",
-    "express": "^4.16.4",
-    "express-basic-auth": "^1.1.6",
+    "colyseus": "^0.12.4",
+    "colyseus.js": "^0.12.2",
+    "express": "^4.17.1",
+    "express-basic-auth": "^1.2.0",
     "express-jwt": "^5.3.1"
   }
 }
