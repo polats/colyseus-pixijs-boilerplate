@@ -20,6 +20,18 @@ import { monitor } from "@colyseus/monitor";
 import { ArenaRoom } from "./rooms/ArenaRoom";
 
 export const port = Number(process.env.PORT || 8080);
+
+const HASWINDOW = typeof window !== 'undefined';
+const DEV_URL = "localhost"; // "127.0.0.1";
+const FALLBACK_GLITCH_URL = "colyseus-pixijs-boilerplate.glitch.me";
+
+const ENDPOINT = (process.env.NODE_ENV==="production")
+      ? HASWINDOW
+         ?  window.location.host
+         :  FALLBACK_GLITCH_URL
+      )
+      : DEV_URL;
+
 export const endpoint = "localhost";
 
 export let STATIC_DIR: string;

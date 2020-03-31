@@ -13,7 +13,7 @@ const FALLBACK_GLITCH_URL = "colyseus-pixijs-boilerplate.glitch.me";
 
 const PROTOCOL = (process.env.NODE_ENV==="production") ? "wss://" : "ws:/";
 const APP_URL = (process.env.NODE_ENV==="production")
-      ? (typeof window !== 'undefined'
+      ? (HASWINDOW
          ?  window.location.host
          :  FALLBACK_GLITCH_URL
       )
