@@ -3,9 +3,23 @@ import * as Viewport from "pixi-viewport";
 import { Room, Client } from "colyseus.js";
 import { State } from "../server/rooms/State";
 
-const ENDPOINT = (process.env.NODE_ENV==="development")
-    ? "ws://localhost:8080"
-    : "wss://colyseus-pixijs-boilerplate.herokuapp.com";
+// const ENDPOINT = (process.env.NODE_ENV==="development")
+//     ? "ws://localhost:8080"
+//     : "wss://colyseus-pixijs-boilerplate.herokuapp.com";
+
+const HASWINDOW = typeof window !== 'undefined';
+const DEV_URL = "localhost:8080"; // "127.0.0.1:8080";
+const FALLBACK_GLITCH_URL = "colyseus-pixijs-boilerplate.glitch.me";
+
+const PROTOCOL = (process.env.NODE_ENV==="production") ? "wss://" : "ws:/";
+const APP_URL = (process.env.NODE_ENV==="production")
+      ? (typeof window !== 'undefined'
+         ?  window.location.host
+         :  FALLBACK_GLITCH_URL
+      )
+      : DEV_URL;
+
+const ENDPOINT = PROTOCOL + APP_URL;
 
 const WORLD_SIZE = 2000;
 
