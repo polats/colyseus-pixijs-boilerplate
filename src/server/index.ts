@@ -5,7 +5,11 @@ let webpack, webpackDevMiddleware, webpackHotMiddleware, webpackConfig;
 if (process.env.NODE_ENV !== "production") {
     webpack = require("webpack");
     webpackDevMiddleware = require("webpack-dev-middleware");
-    webpackConfig = require("../../webpack.config");
+
+    process.env.NODE_ENV === "development"
+    ? webpackConfig = require("../../webpack.config")
+    : webpackConfig = require("../webpack.config");
+
     webpackHotMiddleware = require("webpack-hot-middleware");
 }
 
@@ -21,16 +25,19 @@ import { ArenaRoom } from "./rooms/ArenaRoom";
 
 export const port = Number(process.env.PORT || 8080);
 
-const HASWINDOW = typeof window !== 'undefined';
+declare var window: any;
+export let PROD_URL: string;
 const DEV_URL = "localhost"; // "127.0.0.1";
 const FALLBACK_GLITCH_URL = "colyseus-pixijs-boilerplate.glitch.me";
 
-const endpoint = (process.env.NODE_ENV==="production")
-      ? HASWINDOW
-         ?  window.location.host
-         :  FALLBACK_GLITCH_URL
-      )
-      : DEV_URL;
+try {
+  PROD_URL = window.location.host
+}
+catch (e) {
+  PROD_URL = FALLBACK_GLITCH_URL;
+}
+
+const endpoint = (process.env.NODE_ENV==="production") ? PROD_URL : DEV_URL;
 
 export let STATIC_DIR: string;
 
@@ -65,4 +72,4 @@ const auth = basicAuth({ users: { 'admin': 'admin' }, challenge: true });
 app.use("/colyseus", auth, monitor());
 
 gameServer.listen(port);
-console.log(`Listening on http://${endpoint}:${port}`);
+console.log(`Listening on ${endpoint}:${port}`);
