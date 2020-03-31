@@ -2,13 +2,11 @@
  * embed webpack-dev-server
  */
 let webpack, webpackDevMiddleware, webpackHotMiddleware, webpackConfig;
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
     webpack = require("webpack");
     webpackDevMiddleware = require("webpack-dev-middleware");
 
-    process.env.NODE_ENV === "development"
-    ? webpackConfig = require("../../webpack.config")
-    : webpackConfig = require("../webpack.config");
+    webpackConfig = require("../../webpack.config")
 
     webpackHotMiddleware = require("webpack-hot-middleware");
 }
@@ -49,7 +47,7 @@ const gameServer = new Server({
 
 gameServer.define("arena", ArenaRoom);
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
     const webpackCompiler = webpack(webpackConfig({}));
     app.use(webpackDevMiddleware(webpackCompiler, {}));
     app.use(webpackHotMiddleware(webpackCompiler));
