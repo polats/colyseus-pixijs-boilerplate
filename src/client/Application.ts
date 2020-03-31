@@ -58,7 +58,8 @@ export class Application extends PIXI.Application {
 
     async authenticate() {
         // anonymous auth
-        await this.client.auth.login();
+
+        // await this.client.auth.login();
 
         console.log("Success!", this.client.auth);
 
